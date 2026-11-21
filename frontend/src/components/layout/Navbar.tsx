@@ -1,16 +1,21 @@
 import React from "react";
 import type { ActiveTab } from "../../types";
 
+const DEFAULT_DOCUMENTATION_URL =
+  "https://drive.google.com/file/d/1mDOBTRnunu0Q9GQsRVdyhlxzHnuuvUrS/view?usp=drive_link";
+
 interface NavbarProps {
   activeTab: ActiveTab;
   onTabChange: (tab: ActiveTab) => void;
-  apiOnline: boolean;
+  apiOnline?: boolean;
+  documentationUrl?: string;
 }
 
 export const Navbar: React.FC<NavbarProps> = ({
   activeTab,
   onTabChange,
-  apiOnline,
+  documentationUrl =
+    import.meta.env.VITE_DOCUMENTATION_URL || DEFAULT_DOCUMENTATION_URL,
 }) => {
   return (
     <header className="sticky top-0 z-30 w-full border-b border-zinc-800/90 bg-[#09090b]/95 backdrop-blur-md">
@@ -60,14 +65,16 @@ export const Navbar: React.FC<NavbarProps> = ({
         </div>
 
         <div className="flex shrink-0 items-center gap-2 sm:gap-3">
-          <div className="flex shrink-0 items-center gap-1.5 rounded-full border border-zinc-800 bg-zinc-900/90 px-2.5 py-1 text-[10px] font-medium whitespace-nowrap text-zinc-300 sm:gap-2 sm:px-3 sm:text-[11px]">
-            <span
-              className={`h-2 w-2 shrink-0 rounded-full ${
-                apiOnline ? "bg-emerald-400" : "bg-red-500"
-              }`}
-            />
-            <span>{apiOnline ? "API Connected" : "API Offline"}</span>
-          </div>
+          <a
+            href={documentationUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex shrink-0 items-center gap-1.5 rounded-full border border-red-500/35 bg-red-950/30 px-2.5 py-1 text-[10px] font-semibold whitespace-nowrap text-red-300 transition hover:border-red-400/60 hover:bg-red-950/55 hover:text-white sm:gap-2 sm:px-3.5 sm:text-[11px]"
+          >
+            <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-red-500" />
+            <span>Documentation</span>
+            <span aria-hidden="true">↗</span>
+          </a>
         </div>
       </div>
 
