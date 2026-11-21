@@ -33,3 +33,9 @@ Thumbs.db
 .idea/
 *.swp
 *.swo
+
+node_modules/
+dist/
+*.js
+*.js.map
+.env

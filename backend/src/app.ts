@@ -17,7 +17,9 @@ app.get("/api/health", (_req, res) => {
     service: "doomsday-ready-api",
   });
 });
-
+app.get('/', (req, res) => {
+  res.send('API is running successfully!');
+});
 // Feature routes
 app.use("/api/movies", movieRoutes);
 app.use("/api/cinemas", cinemaRoutes);
